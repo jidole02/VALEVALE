@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import Background from "./background";
 import * as s from "./style";
 
 let i: number;
 export default function PlayGround() {
-  const [data, setData] = useState<string>();
+  const [data, setData] = useState<string>("");
   const [check, setCheck] = useState<number>(0);
   const [arrNum, setArrNum] = useState<number>(0);
   const WordInput = useRef<HTMLDivElement | null>(null);
@@ -33,7 +34,7 @@ export default function PlayGround() {
         alert("타임오버!");
         clearInterval(timer);
       }
-    }, 100 * (arrNum + 1));
+    }, 50 * (arrNum + 1));
   };
   useEffect(() => {
     if (wordArr.length === arrNum) {
@@ -52,9 +53,10 @@ export default function PlayGround() {
   };
   useEffect(() => {
     Input.current?.focus();
-  }, []);
+  });
   return (
     <>
+      <Background />
       <s.MatchWordContainer>
         <s.MatchWord ref={WordInput}></s.MatchWord>
       </s.MatchWordContainer>

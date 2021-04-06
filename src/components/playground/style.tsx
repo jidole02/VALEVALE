@@ -8,6 +8,7 @@ export const UnderBar = styled.footer`
   align-items: center;
   position: absolute;
   bottom: 0;
+  background-color: transparent;
 `;
 
 export const WordInput = styled.input`
@@ -16,6 +17,7 @@ export const WordInput = styled.input`
   border-bottom: 2px solid black;
   padding: 15px 20px;
   font-size: 20px;
+  background-color: transparent;
 `;
 
 export const MatchWordContainer = styled.div`
@@ -30,4 +32,26 @@ export const MatchWordContainer = styled.div`
 export const MatchWord = styled.div`
   /* 맞출 단어 */
   font-size: 13vmin;
+`;
+
+export const BackgroundWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
+
+interface Circle {
+  x: string;
+  y: string;
+  color: string;
+}
+
+export const Circle = styled.div<Circle>`
+  width: 300px;
+  height: 300px;
+  background-color: ${(props: Circle) => props.color};
+  border-radius: 50%;
+  transform: ${(props: Circle) => `translate(${props.x}%,${props.y}%)`};
+  position: absolute;
 `;
