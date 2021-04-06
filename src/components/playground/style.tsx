@@ -41,17 +41,17 @@ export const BackgroundWrapper = styled.div`
   overflow: hidden;
 `;
 
-interface Circle {
+interface BCircle {
   x: string;
   y: string;
   color: string;
 }
 
-export const Circle = styled.div<Circle>`
+export const Circle = styled.div<BCircle>`
   width: 300px;
   height: 300px;
-  background-color: ${(props: Circle) => props.color};
+  background-color: ${(props: BCircle) => props.color};
   border-radius: 50%;
-  transform: ${(props: Circle) => `translate(${props.x}%,${props.y}%)`};
+  transform: ${(props: BCircle) => `translate(${props.x}%,${props.y}%)`};
   position: absolute;
 `;

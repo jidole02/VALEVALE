@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import Result from "../result";
 import Background from "./background";
 import * as s from "./style";
 
@@ -7,6 +8,7 @@ export default function PlayGround() {
   const [data, setData] = useState<string>("");
   const [check, setCheck] = useState<number>(0);
   const [arrNum, setArrNum] = useState<number>(0);
+  const [end,setEnd] = useState<boolean>(false);
   const WordInput = useRef<HTMLDivElement | null>(null);
   const Input = useRef<HTMLInputElement | null>(null);
   const wordArr = ["정지원", "박동행", "김동씹", "안병헌", "박승준"];
@@ -19,6 +21,7 @@ export default function PlayGround() {
   );
   const WordAnim = (word: string) => {
     i = 0;
+    console.log(word);
     if (WordInput.current !== null && WordInput.current !== undefined) {
       WordInput.current.style.fontSize = `${13}vmin`;
     }
@@ -31,17 +34,18 @@ export default function PlayGround() {
         WordInput.current.style.fontSize = `${13 - i / 10}vmin`;
       }
       if (13 - i / 10 === 0) {
-        alert("타임오버!");
+        setEnd(true); // 타임오버
         clearInterval(timer);
       }
     }, 50 * (arrNum + 1));
   };
   useEffect(() => {
     if (wordArr.length === arrNum) {
-      alert("클리어!");
+      setEnd(true); // 클리어
+    } else {
+      WordAnim(wordArr[arrNum]);
+      setArrNum(arrNum + 1);
     }
-    WordAnim(wordArr[arrNum]);
-    setArrNum(arrNum + 1);
   }, [check]);
   const CheckWord = (e: any) => {
     if (e.key === "Enter") {
@@ -53,9 +57,10 @@ export default function PlayGround() {
   };
   useEffect(() => {
     Input.current?.focus();
-  });
+  }, [data]);
   return (
     <>
+    {end && <Result/>}
       <Background />
       <s.MatchWordContainer>
         <s.MatchWord ref={WordInput}></s.MatchWord>
