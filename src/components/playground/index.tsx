@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as s from "./style";
 
+let i: number;
 export default function PlayGround() {
   const [data, setData] = useState<string>();
   const [check, setCheck] = useState<number>(0);
   const [arrNum, setArrNum] = useState<number>(0);
   const WordInput = useRef<HTMLDivElement | null>(null);
-  const wordArr = ["정지원", "이주열", "김재현", "김지민", "안병헌", "손채건"];
+  const Input = useRef<HTMLInputElement | null>(null);
+  const wordArr = ["정지원", "박동행", "김동씹", "안병헌", "박승준"];
   const InputData = useCallback(
     (e: any): void => {
       const { value } = e.target;
@@ -14,31 +16,24 @@ export default function PlayGround() {
     },
     [data]
   );
-  const [answerAlarm,setAnswerAlarm] = useState<number | null>(null);
   const WordAnim = (word: string) => {
-    let i = 0;
-    console.log(i);
+    i = 0;
     if (WordInput.current !== null && WordInput.current !== undefined) {
-        WordInput.current.style.fontSize = `${13}vmin`;
+      WordInput.current.style.fontSize = `${13}vmin`;
     }
     if (WordInput.current !== null) {
       WordInput.current.innerHTML = word;
     }
     var timer = setInterval(() => {
-        console.log(wordArr[arrNum]);
       i++;
       if (WordInput.current !== null && WordInput.current !== undefined) {
         WordInput.current.style.fontSize = `${13 - i / 10}vmin`;
-      }
-      if(answerAlarm === arrNum){
-          console.log("확인")
-          clearInterval(timer);
       }
       if (13 - i / 10 === 0) {
         alert("타임오버!");
         clearInterval(timer);
       }
-    }, 30);
+    }, 100 * (arrNum + 1));
   };
   useEffect(() => {
     if (wordArr.length === arrNum) {
@@ -51,13 +46,13 @@ export default function PlayGround() {
     if (e.key === "Enter") {
       if (wordArr[arrNum - 1] === data) {
         setCheck(check + 1);
-        setData('');
-        setAnswerAlarm(arrNum);
-      } else {
-        alert("아쉽지만 틀렸네요...");
+        setData("");
       }
     }
   };
+  useEffect(() => {
+    Input.current?.focus();
+  }, []);
   return (
     <>
       <s.MatchWordContainer>
@@ -69,6 +64,7 @@ export default function PlayGround() {
           onChange={InputData}
           onKeyPress={CheckWord}
           value={data}
+          ref={Input}
         />
       </s.UnderBar>
     </>
