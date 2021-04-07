@@ -22,12 +22,12 @@ export default function Menu() {
   const ChoiceLv = (e: number) => {
     history.push(`/play/${e}`);
   };
-  const a=(e:any)=>{
-      e.target.innerHTML = `▶ ${e.target.innerHTML}`;
-  }
-  const b=(e:any)=>{
+  const a = (e: any) => {
+    e.target.innerHTML = `▶ ${e.target.innerHTML}`;
+  };
+  const b = (e: any) => {
     e.target.innerHTML = `level ${e.target.id}`;
-  }
+  };
   return (
     <s.MenuWrapper style={load ? { backgroundColor: "rgb(0,0,0,0.8)" } : {}}>
       <s.Video
@@ -39,11 +39,11 @@ export default function Menu() {
         poster="aaa"
         preload="bbb"
       />
-      <s.Title>PLAY GAME</s.Title>
+      <s.Title>GG ONLINE</s.Title>
       <s.SubTitle>새로운 타자게임을 경험해보세요!</s.SubTitle>
       <s.GridContainer>
         {LArr.map((e: number, index: number) => {
-            let strID:string = e.toString()
+          let strID: string = e.toString();
           return (
             <s.menu
               key={index}

@@ -76,6 +76,9 @@ export default function PlayGround({ match }: any) {
       }
     }
   }, [check]);
+  useEffect(()=>{
+    localStorage.setItem('end', '.');
+  },[])
   const CheckWord = (e: any) => {
     if (e.key === "Enter") {
       if (wordArr[arrNum - 1] === data) {
@@ -95,7 +98,7 @@ export default function PlayGround({ match }: any) {
       {end && <Result />}
       <Background />
       {!timeOut && <s.StartTime>{time}</s.StartTime>}
-      <Header />
+      <Header gameState={end}/>
       <s.MatchWordContainer>
         <s.MatchWord ref={WordInput}></s.MatchWord>
       </s.MatchWordContainer>

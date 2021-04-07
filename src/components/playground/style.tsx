@@ -135,3 +135,7 @@ export const StartTime = styled.div`
   text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 10px #fff, 0 0 20px #ff00de,
     0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 50px #ff00de, 0 0 50px #ff00de;
 `;
+
+export const Li = styled.li`
+padding:7px 0;
+`
