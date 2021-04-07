@@ -2,7 +2,7 @@ import * as s from "./style";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Video from "../IMG/video.mp4";
+import Video from "../IMG/BACKVIDEO.mp4";
 
 export default function Menu() {
   const arr: any = [];
