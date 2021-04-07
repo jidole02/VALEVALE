@@ -95,7 +95,7 @@ export default function PlayGround({ match }: any) {
   }, [data]);
   return (
     <>
-      {end && <Result />}
+      {end && <Result/>}
       <Background />
       {!timeOut && <s.StartTime>{time}</s.StartTime>}
       <Header gameState={end}/>

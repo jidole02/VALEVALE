@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
         }
     }
     *{
+        -ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
         font-family:나눔스퀘어;
     }
     a{
