@@ -1,17 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Result from "../result";
 import Background from "./background";
+import Header from "./header";
 import * as s from "./style";
 
 let i: number;
-export default function PlayGround() {
+export default function PlayGround({ match }: any) {
   const [data, setData] = useState<string>("");
   const [check, setCheck] = useState<number>(0);
   const [arrNum, setArrNum] = useState<number>(0);
-  const [end,setEnd] = useState<boolean>(false);
+  const [end, setEnd] = useState<boolean>(false);
   const WordInput = useRef<HTMLDivElement | null>(null);
   const Input = useRef<HTMLInputElement | null>(null);
-  const wordArr = ["정지원", "박동행", "김동씹", "안병헌", "박승준"];
+  const [time,setTime] = useState<number>(3);
+  const [timeOut,setTimeOut] = useState<boolean>(false);
+  const wordArr = ["정지원", "박승준", "김동이", "김재현"];
   const InputData = useCallback(
     (e: any): void => {
       const { value } = e.target;
@@ -21,7 +24,6 @@ export default function PlayGround() {
   );
   const WordAnim = (word: string) => {
     i = 0;
-    console.log(word);
     if (WordInput.current !== null && WordInput.current !== undefined) {
       WordInput.current.style.fontSize = `${13}vmin`;
     }
@@ -30,27 +32,57 @@ export default function PlayGround() {
     }
     var timer = setInterval(() => {
       i++;
+      if (localStorage.getItem("ans") === word) {
+        clearInterval(timer);
+      }
       if (WordInput.current !== null && WordInput.current !== undefined) {
         WordInput.current.style.fontSize = `${13 - i / 10}vmin`;
       }
       if (13 - i / 10 === 0) {
+        console.log("끝" + arrNum + wordArr[arrNum]);
+        window.localStorage.setItem("infor", "GAME OVER...");
         setEnd(true); // 타임오버
         clearInterval(timer);
       }
-    }, 50 * (arrNum + 1));
+    }, (80 / match.params.id) * (arrNum + 1));
   };
   useEffect(() => {
     if (wordArr.length === arrNum) {
+      localStorage.setItem("ans", wordArr[arrNum - 1]);
+      if (!end) {
+        window.localStorage.setItem("infor", "YOU WIN!");
+      }
       setEnd(true); // 클리어
     } else {
-      WordAnim(wordArr[arrNum]);
-      setArrNum(arrNum + 1);
+      if (arrNum === 0) {
+        let i = 2;  
+        var a = setInterval(()=>{
+          setTime(i);
+          i--;
+          if(i === 0){
+            clearInterval(a);
+          }
+        },1000)
+        // 처음 들어왔으면 ...
+        setTimeout(() => {
+          setTimeOut(true);
+          WordAnim(wordArr[arrNum]);
+          setArrNum(arrNum + 1);
+        }, 3000);
+      } else {
+        // 두번째부터
+        WordAnim(wordArr[arrNum]);
+        setArrNum(arrNum + 1);
+      }
     }
   }, [check]);
   const CheckWord = (e: any) => {
     if (e.key === "Enter") {
       if (wordArr[arrNum - 1] === data) {
+        localStorage.setItem("ans", data);
         setCheck(check + 1);
+        setData("");
+      } else {
         setData("");
       }
     }
@@ -60,8 +92,10 @@ export default function PlayGround() {
   }, [data]);
   return (
     <>
-    {end && <Result/>}
+      {end && <Result />}
       <Background />
+      {!timeOut && <s.StartTime>{time}</s.StartTime>}
+      <Header />
       <s.MatchWordContainer>
         <s.MatchWord ref={WordInput}></s.MatchWord>
       </s.MatchWordContainer>

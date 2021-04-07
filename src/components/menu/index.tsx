@@ -1,33 +1,62 @@
 import * as s from "./style";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import Video from "../IMG/video.mp4";
 
 export default function Menu() {
   const arr: any = [];
   const history = useHistory();
   const [LArr, setLArr] = useState<any>([]);
+  const [load, setLoad] = useState<boolean>(false);
   useEffect(() => {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i < 100; i++) {
       arr.push(i);
     }
     setLArr(arr);
+    localStorage.setItem("ans", "."); // 답 맞추는거 초기화
+    setTimeout(() => {
+      setLoad(true);
+    }, 1000);
   }, []);
-  const ChoiceLv=(e : number)=>{
-      history.push(`/play/${e}`)
+  const ChoiceLv = (e: number) => {
+    history.push(`/play/${e}`);
+  };
+  const a=(e:any)=>{
+      e.target.innerHTML = `▶ ${e.target.innerHTML}`;
+  }
+  const b=(e:any)=>{
+    e.target.innerHTML = `level ${e.target.id}`;
   }
   return (
-    <s.MenuWrapper>
+    <s.MenuWrapper style={load ? { backgroundColor: "rgb(0,0,0,0.8)" } : {}}>
+      <s.Video
+        src={Video}
+        autoPlay
+        controls
+        loop
+        muted
+        poster="aaa"
+        preload="bbb"
+      />
       <s.Title>PLAY GAME</s.Title>
       <s.SubTitle>새로운 타자게임을 경험해보세요!</s.SubTitle>
       <s.GridContainer>
         {LArr.map((e: number, index: number) => {
-          return <s.menu 
-          key={index}
-          onClick={()=>{
-              ChoiceLv(e)
-          }}
-          >level {e}</s.menu>;
+            let strID:string = e.toString()
+          return (
+            <s.menu
+              key={index}
+              onClick={() => {
+                ChoiceLv(e);
+              }}
+              onMouseOver={a}
+              onMouseOut={b}
+              id={strID}
+            >
+              level {e}
+            </s.menu>
+          );
         })}
       </s.GridContainer>
     </s.MenuWrapper>
