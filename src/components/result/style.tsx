@@ -45,3 +45,22 @@ export const ChoiceDiv = styled.div`
   justify-content: space-between;
   margin-top: 50px;
 `;
+
+export const SideBar = styled.div`
+width:10%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+position:absolute;
+z-index:500;
+right:0;
+`
+
+export const Arrow = styled(ResultMent)`
+font-size:7vmin;
+cursor:pointer;
+:hover{
+  opacity:0.7;
+}
+`

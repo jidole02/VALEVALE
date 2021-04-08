@@ -3,6 +3,7 @@ import Result from "../result";
 import Background from "./background";
 import Header from "./header";
 import * as s from "./style";
+import namer from 'korean-name-generator';
 
 let i: number;
 export default function PlayGround({ match }: any) {
@@ -14,7 +15,14 @@ export default function PlayGround({ match }: any) {
   const Input = useRef<HTMLInputElement | null>(null);
   const [time,setTime] = useState<number>(3);
   const [timeOut,setTimeOut] = useState<boolean>(false);
-  const wordArr = ["정지원", "박승준", "김동이", "김재현"];
+  const [wordArr] = useState<string[]>([]);
+
+  useEffect(()=>{
+    for(let k = 0;k<15;k++){
+      var name = namer.generate();
+      wordArr.push(name);
+    }
+  },[])
   const InputData = useCallback(
     (e: any): void => {
       const { value } = e.target;
@@ -44,10 +52,10 @@ export default function PlayGround({ match }: any) {
         setEnd(true); // 타임오버
         clearInterval(timer);
       }
-    }, (80 / match.params.id) * (arrNum + 1));
+    }, (80 / match.params.id * 2) * (arrNum + 1));
   };
   useEffect(() => {
-    if (wordArr.length === arrNum) {
+    if (wordArr.length === arrNum && wordArr.length > 0 ) {
       localStorage.setItem("ans", wordArr[arrNum - 1]);
       if (!end) {
         window.localStorage.setItem("infor", "YOU WIN!");
@@ -95,7 +103,7 @@ export default function PlayGround({ match }: any) {
   }, [data]);
   return (
     <>
-      {end && <Result/>}
+      {end && <Result number={match.params.id}/>}
       <Background />
       {!timeOut && <s.StartTime>{time}</s.StartTime>}
       <Header gameState={end}/>
