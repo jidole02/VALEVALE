@@ -3,7 +3,7 @@ import Result from "../result";
 import Background from "./background";
 import Header from "./header";
 import * as s from "./style";
-import namer from 'korean-name-generator';
+import namer from "korean-name-generator";
 
 let i: number;
 export default function PlayGround({ match }: any) {
@@ -13,16 +13,16 @@ export default function PlayGround({ match }: any) {
   const [end, setEnd] = useState<boolean>(false);
   const WordInput = useRef<HTMLDivElement | null>(null);
   const Input = useRef<HTMLInputElement | null>(null);
-  const [time,setTime] = useState<number>(3);
-  const [timeOut,setTimeOut] = useState<boolean>(false);
+  const [time, setTime] = useState<number>(3);
+  const [timeOut, setTimeOut] = useState<boolean>(false);
   const [wordArr] = useState<string[]>([]);
 
-  useEffect(()=>{
-    for(let k = 0;k<7;k++){
+  useEffect(() => {
+    for (let k = 0; k < 7; k++) {
       var name = namer.generate();
       wordArr.push(name);
     }
-  },[])
+  }, []);
   const InputData = useCallback(
     (e: any): void => {
       const { value } = e.target;
@@ -52,10 +52,10 @@ export default function PlayGround({ match }: any) {
         setEnd(true); // 타임오버
         clearInterval(timer);
       }
-    }, (150 / match.params.id * 2));
+    }, (150 / match.params.id) * 3);
   };
   useEffect(() => {
-    if (wordArr.length === arrNum && wordArr.length > 0 ) {
+    if (wordArr.length === arrNum && wordArr.length > 0) {
       localStorage.setItem("ans", wordArr[arrNum - 1]);
       if (!end) {
         window.localStorage.setItem("infor", "YOU WIN!");
@@ -63,14 +63,14 @@ export default function PlayGround({ match }: any) {
       setEnd(true); // 클리어
     } else {
       if (arrNum === 0) {
-        let i = 2;  
-        var a = setInterval(()=>{
+        let i = 2;
+        var a = setInterval(() => {
           setTime(i);
           i--;
-          if(i === 0){
+          if (i === 0) {
             clearInterval(a);
           }
-        },1000)
+        }, 1000);
         // 처음 들어왔으면 ...
         setTimeout(() => {
           setTimeOut(true);
@@ -84,9 +84,9 @@ export default function PlayGround({ match }: any) {
       }
     }
   }, [check]);
-  useEffect(()=>{
-    localStorage.setItem('end', '.');
-  },[])
+  useEffect(() => {
+    localStorage.setItem("end", ".");
+  }, []);
   const CheckWord = (e: any) => {
     if (e.key === "Enter") {
       if (wordArr[arrNum - 1] === data) {
@@ -103,21 +103,25 @@ export default function PlayGround({ match }: any) {
   }, [data]);
   return (
     <>
-      {end && <Result number={match.params.id}/>}
+      {end && <Result number={match.params.id} />}
       <Background />
       {!timeOut && <s.StartTime>{time}</s.StartTime>}
-      <Header gameState={end}/>
+      <Header gameState={end} level={match.params.id} />
       <s.MatchWordContainer>
         <s.MatchWord ref={WordInput}></s.MatchWord>
       </s.MatchWordContainer>
       <s.UnderBar>
-        <s.WordInput
-          placeholder="단어를 입력하세요!!"
-          onChange={InputData}
-          onKeyPress={CheckWord}
-          value={data}
-          ref={Input}
-        />
+        {end ? (
+          <s.WordInput placeholder="단어를 입력하세요!!" readOnly />
+        ) : (
+          <s.WordInput
+            placeholder="단어를 입력하세요!!"
+            onChange={InputData}
+            onKeyPress={CheckWord}
+            value={data}
+            ref={Input}
+          />
+        )}
       </s.UnderBar>
     </>
   );

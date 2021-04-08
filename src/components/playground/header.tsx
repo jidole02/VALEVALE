@@ -2,16 +2,17 @@ import * as s from "./style";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-interface Params{
-    gameState : boolean
+interface Params {
+  gameState: boolean;
+  level: number;
 }
 
-export default function Header({gameState}:Params){
+export default function Header({ gameState, level }: Params) {
   const history = useHistory();
   const [time, setTime] = useState<number>(0);
   const [STime, setSTime] = useState<number>(0);
-  if(gameState){
-      localStorage.setItem('end','true');
+  if (gameState) {
+    localStorage.setItem("end", "true");
   }
   window.onkeydown = function (e: any) {
     if (e.keyCode === 27) {
@@ -26,11 +27,11 @@ export default function Header({gameState}:Params){
     let j = 0;
     setTimeout(() => {
       var a = setInterval(() => {
-        if(localStorage.getItem('end') === 'true'){
-            clearInterval(a);
+        if (localStorage.getItem("end") === "true") {
+          clearInterval(a);
         }
-        if(gameState){
-            clearInterval(a);
+        if (gameState) {
+          clearInterval(a);
         }
         if (i % 10 == 9) {
           j++;
@@ -49,6 +50,11 @@ export default function Header({gameState}:Params){
         </s.Li>
         <s.Li>
           <s.HMenu>CTRL - 재시작</s.HMenu>
+        </s.Li>
+      </ul>
+      <ul>
+        <s.Li>
+          <s.HMenu style={{fontSize : "2vmin"}}>{level} 단계</s.HMenu>
         </s.Li>
       </ul>
       <ul>

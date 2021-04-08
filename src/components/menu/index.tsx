@@ -29,6 +29,10 @@ export default function Menu() {
     e.target.innerHTML = `level ${e.target.id}`;
   };
   return (
+      <>
+      <s.Rank>
+          <i className="fas fa-trophy"></i>
+      </s.Rank>
     <s.MenuWrapper style={load ? { backgroundColor: "rgb(0,0,0,0.8)" } : {}}>
       <s.Video
         src={Video}
@@ -60,5 +64,6 @@ export default function Menu() {
         })}
       </s.GridContainer>
     </s.MenuWrapper>
+    </>
   );
 }
