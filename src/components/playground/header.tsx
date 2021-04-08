@@ -36,6 +36,7 @@ export default function Header({ gameState, level }: Params) {
         if (i % 10 == 9) {
           j++;
           setSTime(j);
+          localStorage.setItem("time",`${j}.${i%10}`);
         }
         i++;
         setTime(i % 10);

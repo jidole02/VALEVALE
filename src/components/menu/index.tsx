@@ -3,12 +3,17 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Video from "../IMG/BACKVIDEO.mp4";
+import ResultRank from "../result/resultRank";
 
 export default function Menu() {
   const arr: any = [];
   const history = useHistory();
   const [LArr, setLArr] = useState<any>([]);
   const [load, setLoad] = useState<boolean>(false);
+  const [rank, setRank] = useState<boolean>(false);
+  const ShowRank = () => {
+    setRank(!rank);
+  };
   useEffect(() => {
     for (let i = 1; i < 100; i++) {
       arr.push(i);
@@ -30,8 +35,9 @@ export default function Menu() {
   };
   return (
     <>
+    {rank && <ResultRank ment="최단시간 기록자들" func={ShowRank}></ResultRank>}
       <s.Rank>
-        <i className="fas fa-trophy"></i>
+        <i className="fas fa-trophy" onClick={ShowRank}></i>
         <i
           className="fab fa-github"
           onClick={() => {

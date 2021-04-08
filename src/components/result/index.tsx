@@ -27,8 +27,8 @@ export default function Result({ number }: params) {
   }
   return (
       <>
-      {Result && <ResultRank lv={number} func={ResultShow}/>}
-      {submit && <Submit func={SubmitShow}/>}
+      {Result && <ResultRank ment={`lv.${number}를 클리어한 사람`} func={ResultShow}/>}
+      {submit && <Submit func={SubmitShow} level={number}/>}
     <s.ResultWrapper>
       <s.SideBar style={{ left: 0 }}>
         <s.Arrow

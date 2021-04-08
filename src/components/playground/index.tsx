@@ -18,7 +18,7 @@ export default function PlayGround({ match }: any) {
   const [wordArr] = useState<string[]>([]);
 
   useEffect(() => {
-    for (let k = 0; k < 7; k++) {
+    for (let k = 0; k < 1; k++) {
       var name = namer.generate();
       wordArr.push(name);
     }
@@ -47,7 +47,6 @@ export default function PlayGround({ match }: any) {
         WordInput.current.style.fontSize = `${13 - i / 10}vmin`;
       }
       if (13 - i / 10 === 0) {
-        console.log("끝" + arrNum + wordArr[arrNum]);
         window.localStorage.setItem("infor", "GAME OVER...");
         setEnd(true); // 타임오버
         clearInterval(timer);
