@@ -18,7 +18,7 @@ export default function PlayGround({ match }: any) {
   const [wordArr] = useState<string[]>([]);
 
   useEffect(()=>{
-    for(let k = 0;k<15;k++){
+    for(let k = 0;k<7;k++){
       var name = namer.generate();
       wordArr.push(name);
     }
@@ -52,7 +52,7 @@ export default function PlayGround({ match }: any) {
         setEnd(true); // 타임오버
         clearInterval(timer);
       }
-    }, (80 / match.params.id * 2) * (arrNum + 1));
+    }, (150 / match.params.id * 2));
   };
   useEffect(() => {
     if (wordArr.length === arrNum && wordArr.length > 0 ) {
