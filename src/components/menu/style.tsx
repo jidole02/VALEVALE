@@ -62,6 +62,7 @@ export const Rank = styled.div`
   flex-direction: column;
   opacity:0.6;
   i{
+    margin-top:30px;
     color:pink;
     font-size:3vmin;
     cursor:pointer;

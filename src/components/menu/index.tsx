@@ -29,41 +29,47 @@ export default function Menu() {
     e.target.innerHTML = `level ${e.target.id}`;
   };
   return (
-      <>
+    <>
       <s.Rank>
-          <i className="fas fa-trophy"></i>
+        <i className="fas fa-trophy"></i>
+        <i
+          className="fab fa-github"
+          onClick={() => {
+            window.open("https://github.com/jidole02");
+          }}
+        ></i>
       </s.Rank>
-    <s.MenuWrapper style={load ? { backgroundColor: "rgb(0,0,0,0.8)" } : {}}>
-      <s.Video
-        src={Video}
-        autoPlay
-        controls
-        loop
-        muted
-        poster="aaa"
-        preload="bbb"
-      />
-      <s.Title>GG ONLINE</s.Title>
-      <s.SubTitle>새로운 타자게임을 경험해보세요!</s.SubTitle>
-      <s.GridContainer>
-        {LArr.map((e: number, index: number) => {
-          let strID: string = e.toString();
-          return (
-            <s.menu
-              key={index}
-              onClick={() => {
-                ChoiceLv(e);
-              }}
-              onMouseOver={a}
-              onMouseOut={b}
-              id={strID}
-            >
-              level {e}
-            </s.menu>
-          );
-        })}
-      </s.GridContainer>
-    </s.MenuWrapper>
+      <s.MenuWrapper style={load ? { backgroundColor: "rgb(0,0,0,0.8)" } : {}}>
+        <s.Video
+          src={Video}
+          autoPlay
+          controls
+          loop
+          muted
+          poster="aaa"
+          preload="bbb"
+        />
+        <s.Title>GG ONLINE</s.Title>
+        <s.SubTitle>새로운 타자게임을 경험해보세요!</s.SubTitle>
+        <s.GridContainer>
+          {LArr.map((e: number, index: number) => {
+            let strID: string = e.toString();
+            return (
+              <s.menu
+                key={index}
+                onClick={() => {
+                  ChoiceLv(e);
+                }}
+                onMouseOver={a}
+                onMouseOut={b}
+                id={strID}
+              >
+                level {e}
+              </s.menu>
+            );
+          })}
+        </s.GridContainer>
+      </s.MenuWrapper>
     </>
   );
 }
