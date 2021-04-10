@@ -4,6 +4,7 @@ import Background from "./background";
 import Header from "./header";
 import * as s from "./style";
 import namer from "korean-name-generator";
+import { useHistory } from 'react-router-dom';
 
 let i: number;
 export default function PlayGround({ match }: any) {
@@ -16,8 +17,12 @@ export default function PlayGround({ match }: any) {
   const [time, setTime] = useState<number>(3);
   const [timeOut, setTimeOut] = useState<boolean>(false);
   const [wordArr] = useState<string[]>([]);
+  const history = useHistory();
 
   useEffect(() => {
+    if(match.params.id < 1 || match.params.id > 99){
+      history.push('/');
+    }
     for (let k = 0; k < 7; k++) {
       var name = namer.generate();
       wordArr.push(name);
