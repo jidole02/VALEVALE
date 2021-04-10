@@ -4,6 +4,7 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
     ${reset};
     body{
+        background-color:black;
         ::-webkit-scrollbar{
             width:7px;
             background-color:black;
