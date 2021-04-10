@@ -3,7 +3,6 @@ import axios, { Method } from "axios";
 const DOMAIN = "https://sonchaegeon.shop";
 
 export const request = (method: Method, url: string, data: any) => {
-  console.log(method, url, data);
   return axios({
     method: method,
     url: DOMAIN + url,

@@ -5,7 +5,7 @@ import ResultRank from "./resultRank";
 import Submit from "./submit";
 
 interface params {
-  number: string;
+  number: string
 }
 export default function Result({ number }: params) {
   const history = useHistory();

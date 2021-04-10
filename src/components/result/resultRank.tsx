@@ -1,29 +1,34 @@
 import * as s from "./style";
 
-interface params{
-    func? : any, // 선택적 매개 변수 -> 안 넣어줘도 상관 없음
-    ment : string
+interface data {
+  id: number;
+  description: string | null;
+  passtime: number;
+  level: number;
+  nickname: string | null;
 }
-export default function ResultRank({func,ment} : params) {
-    return(
-        <s.ResultRank onClick={func}>
-            <s.RankTitle>{ment}</s.RankTitle>
-            <s.PeopleList>
-                <s.RankName>정지원<b>12초</b></s.RankName>
-                <s.RankDes>대덕 소프트웨어 재학중이다 ㅆ발림들아</s.RankDes>
-            </s.PeopleList>
-            <s.PeopleList>
-                <s.RankName>정지원<b>12초</b></s.RankName>
-                <s.RankDes>대덕 소프트웨어 재학중이다 ㅆ발림들아</s.RankDes>
-            </s.PeopleList>
-            <s.PeopleList>
-                <s.RankName>정지원<b>12초</b></s.RankName>
-                <s.RankDes>대덕 소프트웨어 재학중이다 ㅆ발림들아</s.RankDes>
-            </s.PeopleList>
-            <s.PeopleList>
-                <s.RankName>정지원<b>12초</b></s.RankName>
-                <s.RankDes>대덕 소프트웨어 재학중이다 ㅆ발림들아</s.RankDes>
-            </s.PeopleList>
-        </s.ResultRank>
-    )
+
+interface params {
+  func?: any; // 선택적 매개 변수 -> 안 넣어줘도 상관 없음
+  ment: string;
+  data?: data[];
+}
+export default function ResultRank({ func, ment, data }: params) {
+  console.log(data);
+  return (
+    <s.ResultRank onClick={func}>
+      <s.RankTitle>{ment}</s.RankTitle>
+      {data?.map((e: data, index: number) => {
+        return (
+          <s.PeopleList key={index}>
+            <s.RankName>
+              {e.nickname}
+              <b>{e.passtime}초</b>
+            </s.RankName>
+            <s.RankDes>{e.description}</s.RankDes>
+          </s.PeopleList>
+        );
+      })}
+    </s.ResultRank>
+  );
 }

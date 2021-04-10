@@ -18,12 +18,15 @@ export default function Submit({ func, level }: any) {
     });
   };
   const subData = () => {
-    func();
     request("POST", "/record", data)
       .then((e) => {
+        alert('등록되었습니다!');
+        func();
         console.log(e);
       })
       .catch((err) => {
+        alert('서버 에러...ㅠ');
+        func();
         console.log(err);
       });
   };
@@ -31,7 +34,7 @@ export default function Submit({ func, level }: any) {
     if (typeof loc === "string") {
       setData({
         ...data,
-        passtime: parseInt(loc),
+        passtime: parseFloat(loc),
       });
     }
   }, []);
