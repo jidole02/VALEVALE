@@ -18,7 +18,7 @@ export default function PlayGround({ match }: any) {
   const [wordArr] = useState<string[]>([]);
 
   useEffect(() => {
-    for (let k = 0; k < 1; k++) {
+    for (let k = 0; k < 7; k++) {
       var name = namer.generate();
       wordArr.push(name);
     }

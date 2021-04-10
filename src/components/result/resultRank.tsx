@@ -14,7 +14,6 @@ interface params {
   data?: data[];
 }
 export default function ResultRank({ func, ment, data }: params) {
-  console.log(data);
   return (
     <s.ResultRank onClick={func}>
       <s.RankTitle>{ment}</s.RankTitle>

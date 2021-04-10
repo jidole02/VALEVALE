@@ -12,16 +12,15 @@ export default function Menu() {
   const [LArr, setLArr] = useState<any>([]);
   const [load, setLoad] = useState<boolean>(false);
   const [rank, setRank] = useState<boolean>(false);
-  const [Rdata,setRData] = useState<any>([]);
+  const [Rdata, setRData] = useState<any>([]);
   const ShowRank = () => {
     setRank(!rank);
   };
-  useEffect(()=>{
-    request('get','/record?sort=time',{})
-    .then((e)=>{
+  useEffect(() => {
+    request("get", "/record?sort=time", {}).then((e) => {
       setRData(e);
-    })
-  },[])
+    });
+  }, []);
   useEffect(() => {
     for (let i = 1; i < 100; i++) {
       arr.push(i);
@@ -43,7 +42,13 @@ export default function Menu() {
   };
   return (
     <>
-    {rank && <ResultRank ment="최단시간 기록자들" func={ShowRank} data={Rdata}></ResultRank>}
+      {rank && (
+        <ResultRank
+          ment="최단시간 기록자들"
+          func={ShowRank}
+          data={Rdata}
+        ></ResultRank>
+      )}
       <s.Rank>
         <i className="fas fa-trophy" onClick={ShowRank}></i>
         <i
@@ -53,7 +58,15 @@ export default function Menu() {
           }}
         ></i>
       </s.Rank>
-      <s.MenuWrapper style={load ? { backgroundColor: "rgb(0,0,0,0.8)" } : {}}>
+      <s.MenuWrapper
+        style={
+          load
+            ? rank
+              ? { backgroundColor: "rgb(0,0,0,0.8)", position: "fixed" }
+              : { backgroundColor: "rgb(0,0,0,0.8)" }
+            : {}
+        }
+      >
         <s.Video
           src={Video}
           autoPlay

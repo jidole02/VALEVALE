@@ -22,12 +22,10 @@ export default function Submit({ func, level }: any) {
       .then((e) => {
         alert('등록되었습니다!');
         func();
-        console.log(e);
       })
       .catch((err) => {
         alert('서버 에러...ㅠ');
         func();
-        console.log(err);
       });
   };
   useEffect(() => {
