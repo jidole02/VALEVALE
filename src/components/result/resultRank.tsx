@@ -11,13 +11,13 @@ interface data {
 interface params {
   func?: any; // 선택적 매개 변수 -> 안 넣어줘도 상관 없음
   ment: string;
-  data?: data[];
+  data?: data[] | undefined;
 }
 export default function ResultRank({ func, ment, data }: params) {
   return (
     <s.ResultRank onClick={func}>
       <s.RankTitle>{ment}</s.RankTitle>
-      {data?.map((e: data, index: number) => {
+      {data !== undefined && data?.map((e: data, index: number) => {
         return (
           <s.PeopleList key={index}>
             <s.RankName>

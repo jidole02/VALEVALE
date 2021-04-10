@@ -2,7 +2,13 @@ import * as s from "./style";
 import { useState, useEffect } from "react";
 import { request } from "../axios";
 
-export default function Submit({ func, level }: any) {
+interface params{
+  func:any,
+  level:string,
+  func2?:any
+}
+
+export default function Submit({ func, level,func2 }: params) {
   let loc: string | null = localStorage.getItem("time");
   const [data, setData] = useState({
     nickname: "",
@@ -19,11 +25,12 @@ export default function Submit({ func, level }: any) {
   };
   const subData = () => {
     request("POST", "/record", data)
-      .then((e) => {
+      .then(() => {
         alert('등록되었습니다!');
         func();
+        func2();
       })
-      .catch((err) => {
+      .catch(() => {
         alert('서버 에러...ㅠ');
         func();
       });

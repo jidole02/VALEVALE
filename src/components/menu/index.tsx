@@ -76,8 +76,8 @@ export default function Menu() {
           poster="aaa"
           preload="bbb"
         />
-        <s.Title>GG ONLINE</s.Title>
-        <s.SubTitle>새로운 타자게임을 경험해보세요!</s.SubTitle>
+        <s.Title>VALE VALE</s.Title>
+        <s.SubTitle>발레발레에서 새로운 타자게임을 경험해보세요!</s.SubTitle>
         <s.GridContainer>
           {LArr.map((e: number, index: number) => {
             let strID: string = e.toString();

@@ -20,6 +20,10 @@ export default function Result({ number }: params) {
   const [Result,setResult] = useState<boolean>(false);
   const [submit,setSubmit] = useState<boolean>(false);
   const [data,setData] = useState<Data[]>([]);
+  const [dataBoolean,setDataBoolean] = useState<boolean>(false);
+  const booleanHandle =()=>{
+    setDataBoolean(!dataBoolean);
+  }
   useEffect(() => {
     setTimeout(() => {
       localStorage.setItem("ans", ".");
@@ -39,11 +43,11 @@ export default function Result({ number }: params) {
     .then((e)=>{
       setData(e);
     })
-  },[])
+  },[dataBoolean]) // 등록 할 때마다 새로 받아오게
   return (
       <>
       {Result && <ResultRank ment={`lv.${number}를 클리어한 사람`} data={data} func={ResultShow}/>}
-      {submit && <Submit func={SubmitShow} level={number}/>}
+      {submit && <Submit func={SubmitShow} level={number} func2={booleanHandle}/>}
     <s.ResultWrapper>
       <s.SideBar style={{ left: 0 }}>
         <s.Arrow
