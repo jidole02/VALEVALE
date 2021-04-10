@@ -78,6 +78,7 @@ export default function Menu() {
         />
         <s.Title>VALE VALE</s.Title>
         <s.SubTitle>발레발레에서 새로운 타자게임을 경험해보세요!</s.SubTitle>
+        <div id='mobonDivBanner_527486'><iframe name='ifrad' id='mobonIframe_527486' src='//www.mediacategory.com/servlet/adBanner?from="+escape(document.referrer)+"&s=527486&igb=75&iwh=468_60&cntad=1&cntsr=3' frameBorder='0' scrolling='no' style={{height:"60px", width:"468px",marginBottom:"50px",marginTop:"20px"}}></iframe></div>
         <s.GridContainer>
           {LArr.map((e: number, index: number) => {
             let strID: string = e.toString();
