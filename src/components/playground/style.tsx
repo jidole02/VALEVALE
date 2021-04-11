@@ -18,7 +18,7 @@ export const WordInput = styled.input`
   padding: 15px 20px;
   font-size: 20px;
   background-color: transparent;
-  color:whitesmoke;
+  color: whitesmoke;
 `;
 
 export const MatchWordContainer = styled.div`
@@ -33,23 +33,23 @@ export const MatchWordContainer = styled.div`
 export const MatchWord = styled.div`
   /* 맞출 단어 */
   font-size: 13vmin;
-  color:pink;
+  color: pink;
   text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 10px #fff, 0 0 20px #ff00de,
     0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 50px #ff00de, 0 0 50px #ff00de;
 `;
 
 const font = styled.b`
-color:pink;
+  color: pink;
   text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 10px #fff, 0 0 20px #ff00de,
     0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 50px #ff00de, 0 0 50px #ff00de;
-`
+`;
 
 export const BackgroundWrapper = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color:black;
+  background-color: black;
 `;
 
 interface BCircle {
@@ -81,8 +81,7 @@ const CircleAnim = keyframes`
 100%{
   margin:0;
 }
-`
-
+`;
 
 export const Circle = styled.div<BCircle>`
   width: 300px;
@@ -93,7 +92,7 @@ export const Circle = styled.div<BCircle>`
   position: absolute;
   box-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 10px #fff, 0 0 20px #ff00de,
     0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 50px #ff00de, 0 0 50px #ff00de;
-    animation:${CircleAnim} 20s infinite;
+  animation: ${CircleAnim} 20s infinite;
 `;
 
 export const Header = styled.header`
@@ -101,13 +100,13 @@ export const Header = styled.header`
   padding: 3% 15%;
   position: absolute;
   z-index: 100;
-  display:flex;
-  justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const HMenu = styled(font)`
-font-size:1.7vmin;
-`
+  font-size: 1.7vmin;
+`;
 
 const TimeAnim = keyframes`
 0%{
@@ -137,5 +136,5 @@ export const StartTime = styled.div`
 `;
 
 export const Li = styled.li`
-padding:7px 0;
-`
+  padding: 7px 0;
+`;
